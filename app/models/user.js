@@ -6,12 +6,12 @@ const bcrypt = require('bcrypt-nodejs');
 const crypto = require('crypto');
 
 const UserSchema = new Schema({
-  mail: { type: String, unique: true, lowecase: true },
+  email: { type: String, unique: true, lowecase: true },
   displayName: String,
   avatar: String,
   password: { type: String, select: false},
-  signupDate; { type: Date, default: Date.now() }
-  signupDate; Date
+  signupDate: { type: Date, default: Date.now() }
+  lastLogin: Date
 
 });
 
