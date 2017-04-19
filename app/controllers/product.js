@@ -9,7 +9,7 @@ function getProduct (req,res) {
     if(err) return res.status(500).send({ message:`Error al realizar la petición: ${err}` });
     if(!product) return res.status(404).send({ message: 'No existe el producto' });
 
-    res.status(200).send({ product: product});
+    res.status(200).send({ product: product });
   });
 }
 
