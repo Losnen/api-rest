@@ -10,19 +10,19 @@ const UserSchema = new Schema({
   displayName: String,
   avatar: String,
   password: { type: String, select: false},
-  signupDate: { type: Date, default: Date.now() }
+  signupDate: { type: Date, default: Date.now() },
   lastLogin: Date
 
 });
 
-userSchema.pre('save', (next) => {
+UserSchema.pre('save', (next) => {
   let user = this;
   if(!user.isModified('password')) return next()
 
   bcrypt.getSalt(10, (err,salt) => {
     if (err) return next(err);
 
-    bcrypt.hash(user,password, salt, null, (err, hash) {
+    bcrypt.hash(user,password, salt, null, (err, hash) => {
       if (err) return next(err);
 
       user.password = hash;
@@ -31,7 +31,7 @@ userSchema.pre('save', (next) => {
   });
 });
 
-userSchema.methods.gravatar = () {
+UserSchema.methods.gravatar = () => {
   if (!this.email) return `https://gravatar.com/avatar/?s=2006d=retro`;
 
   const md5 = crypto.createHash('md5').update(this.email).digest('hex');
